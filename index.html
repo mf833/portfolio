@@ -94,7 +94,37 @@ img { display: block; max-width: 100%; height: auto; }
 .nav ul::-webkit-scrollbar { display: none; }
 .nav li a { font-family: var(--f-mono); font-size: var(--step--1); text-decoration: none; color: var(--ink-2); white-space: nowrap; }
 .nav li a:hover { color: var(--brass); }
-@media (max-width: 640px) { .nav-name { display: none; } .nav .wrap { justify-content: flex-start; } }
+@media (max-width: 640px) {
+  .nav-name { display: none; }
+  .nav .wrap { justify-content: flex-start; padding-block: 0.6rem; }
+  .nav ul { flex-wrap: wrap; overflow: visible; gap: 0.35rem 1.1rem; }
+}
+
+/* status chips: in design vs. built vs. coursework */
+.chip.done { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.chip.course { background: var(--brass-soft); color: var(--brass); }
+.fcard .chip { justify-self: start; }
+
+/* zoomable images are wrapped in buttons by script for keyboard access */
+button.zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; font: inherit; color: inherit; }
+button.zoom:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
+
+/* simulation plots */
+.plots { display: grid; gap: 1rem; }
+@media (min-width: 880px) { .plots { grid-template-columns: 1fr 1fr; } }
+.plot { margin: 0; background: var(--sheet); border: 1px solid var(--rule); padding: 0.75rem 0.75rem 0.5rem; min-width: 0; }
+.plot svg { display: block; width: 100%; height: auto; }
+.plot .ax { stroke: var(--ink-2); stroke-width: 1; }
+.plot .grid { stroke: var(--rule); stroke-width: 1; }
+.plot .tick { font-family: var(--f-mono); font-size: 12px; fill: var(--ink-2); }
+.plot .axl { font-family: var(--f-body); font-size: 13px; fill: var(--ink-2); }
+.plot .s-pid { stroke: var(--ink-2); stroke-width: 2; fill: none; stroke-dasharray: 5 4; }
+.plot .s-ipd { stroke: var(--brass); stroke-width: 2.5; fill: none; }
+.plot .refl { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; fill: none; }
+.plot .band { stroke: var(--green); stroke-width: 1; stroke-dasharray: 6 4; fill: none; }
+.plot .lab-pid { font-family: var(--f-body); font-size: 13px; fill: var(--ink-2); }
+.plot .lab-ipd { font-family: var(--f-body); font-size: 13px; font-weight: 600; fill: var(--brass); }
+.plot .lab-band { font-family: var(--f-body); font-size: 12px; fill: var(--green); }
 
 /* ---------- type ---------- */
 .eyebrow {
@@ -350,6 +380,7 @@ dialog.lb button {
       <li><a href="#controls">Controls &amp; analysis</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="https://mf833.github.io/portfolio/Manuely_Feliz_Portes_Resume.pdf" target="_blank" rel="noopener">Résumé ↗</a></li>
     </ul>
   </div>
 </nav>
@@ -370,6 +401,7 @@ dialog.lb button {
         <span class="email">mf833@cornell.edu</span>
         <button class="btn" type="button" data-copy="mf833@cornell.edu" id="copy-hero">Copy email</button>
         <a href="https://www.linkedin.com/in/manuely-feliz-portes/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="https://mf833.github.io/portfolio/Manuely_Feliz_Portes_Resume.pdf" target="_blank" rel="noopener">View résumé (PDF) ↗</a>
       </div>
     </div>
     <figure class="plate">
@@ -379,7 +411,7 @@ dialog.lb button {
         <circle class="dot" cx="1032" cy="686" r="6"/>
         <polyline class="leader" points="1032,720 1032,898 1051,898"/>
       </svg>
-      <div class="callout" aria-hidden="true"><b>WEAPON</b>14,480 RPM (est.)<br>≈280 mph tip</div>
+      <div class="callout" aria-hidden="true"><b>WEAPON PEAK (EST.)</b>14,480 RPM<br>≈280 mph tip</div>
       <figcaption>Jörmungandr · 12 lb spinner · Fusion 360 render</figcaption>
     </figure>
   </div>
@@ -396,15 +428,15 @@ dialog.lb button {
     <div class="featured">
       <a class="fcard" href="#jormungandr">
         <div class="thumb"><img src="img/jorm-built.jpg" alt="" width="1200" height="900"></div>
-        <div class="fbody"><h3>Jörmungandr</h3><p class="tags">Drivetrain · Prototyping · Weapon assembly · Build</p><p class="key">2–1 record · qualified for bracket</p></div>
+        <div class="fbody"><span class="chip done">Competed · NHRL 2026</span><h3>Jörmungandr</h3><p class="tags">Drivetrain · Prototyping · Weapon assembly · Build</p><p class="key">2–1 record · qualified for bracket</p></div>
       </a>
       <a class="fcard" href="#atreides">
         <div class="thumb"><img class="contain" src="img/atreides-assembly.jpg" alt="" width="876" height="458"></div>
-        <div class="fbody"><h3>Atreides</h3><p class="tags">Upright design · Two-weapon packaging · In design</p><p class="key">≈2,212 J predicted weapon energy</p></div>
+        <div class="fbody"><span class="chip">In design · not built yet</span><h3>Atreides</h3><p class="tags">Upright design · Two-weapon packaging</p><p class="key">≈2,212 J predicted weapon energy</p></div>
       </a>
       <a class="fcard" href="#capsize">
         <div class="thumb"><img class="contain" src="img/capsize-wedge.jpg" alt="" width="1020" height="896"></div>
-        <div class="fbody"><h3>Capsize</h3><p class="tags">Drivetrain · Wheels · Subteam leadership</p><p class="key">Advanced into the bracket</p></div>
+        <div class="fbody"><span class="chip done">Competed · NHRL 2025</span><h3>Capsize</h3><p class="tags">Drivetrain · Wheels · Subteam leadership</p><p class="key">Advanced into the bracket</p></div>
       </a>
       <a class="fcard" href="#reaction-wheel">
         <div class="thumb eq-thumb" aria-hidden="true">
@@ -412,15 +444,15 @@ dialog.lb button {
           <span class="eq-small">θ(<i>s</i>) / <i>T</i>(<i>s</i>) = 1 / <i>I s</i>²</span>
           <span class="eq-small">PID · pole placement</span>
         </div>
-        <div class="fbody"><h3>Reaction-wheel attitude control</h3><p class="tags">Dynamic modeling · Feedback control</p><p class="key">PID gains by pole placement</p></div>
+        <div class="fbody"><span class="chip course">Course project + simulation</span><h3>Reaction-wheel attitude control</h3><p class="tags">Dynamic modeling · Feedback control</p><p class="key">4.4% overshoot with I-PD (simulated)</p></div>
       </a>
       <a class="fcard" href="#torque-wrench">
         <div class="thumb"><img src="img/wrench-stress.jpg" alt="" width="1280" height="466"></div>
-        <div class="fbody"><h3>Strain-gauge torque wrench</h3><p class="tags">FEA · Beam theory · Sensor design</p><p class="key">Gauge strain within 0.1% of FEA</p></div>
+        <div class="fbody"><span class="chip course">Course project</span><h3>Strain-gauge torque wrench</h3><p class="tags">FEA · Beam theory · Sensor design</p><p class="key">Gauge strain within 0.1% of FEA</p></div>
       </a>
       <a class="fcard" href="#mclaren">
         <div class="thumb"><img src="img/motec.jpg" alt="" width="1054" height="938"></div>
-        <div class="fbody"><h3>RLL Team McLaren</h3><p class="tags">Race data analysis · Fixture design</p><p class="key">Aero forces from MoTeC telemetry</p></div>
+        <div class="fbody"><span class="chip done">Internship · Summer 2026</span><h3>RLL Team McLaren</h3><p class="tags">Race data analysis · Fixture design</p><p class="key">Aero forces from MoTeC telemetry</p></div>
       </a>
     </div>
   </div>
@@ -491,10 +523,10 @@ dialog.lb button {
     <article class="project" id="jormungandr">
       <div class="project-head">
         <p class="eyebrow">Asymmetric vertical spinner · Spring 2026</p>
-        <h3>Jörmungandr</h3>
+        <div class="name-row"><h3>Jörmungandr</h3><span class="chip done">Competed · NHRL 2026</span></div>
       </div>
       <div class="highlights">
-        <div><b>14,480 RPM</b><span>top speed, estimated from audio</span></div>
+        <div><b>14,480 RPM</b><span>peak bench-test estimate at 100% throttle (audio); run at ≤75% in service</span></div>
         <div><b>2–1</b><span>record at NHRL</span></div>
         <div><b>Bracket</b><span>qualified; club's highest-ranked active robot</span></div>
       </div>
@@ -511,7 +543,9 @@ dialog.lb button {
             <dd>Eight-person Sportsman subteam: design, machining, assembly, testing.</dd>
           </dl>
           <dl class="tblock">
-            <div><dt>Tip speed</dt><dd>≈280 mph, calculated</dd></div>
+            <div><dt>Operating cap</dt><dd>75% throttle, ≈13,200 RPM</dd></div>
+            <div><dt>In fights</dt><dd>40–55%, ≈140–190 mph tip</dd></div>
+            <div><dt>Peak tip speed</dt><dd>≈280 mph, calculated</dd></div>
             <div><dt>Weight</dt><dd>11.86–11.89 lb / 12 lb</dd></div>
             <div><dt>Armor</dt><dd>0.1 in titanium, TPU billet</dd></div>
             <div><dt>Budget</dt><dd>$4,479 of $4,500, 3 copies</dd></div>
@@ -542,7 +576,9 @@ dialog.lb button {
             </div>
             <div class="block">
               <h4>Estimating weapon speed from sound</h4>
-              <p>The team had no tachometer, so we recorded the weapon and took the lowest peak of the audio spectrum. These are estimates, and tip speeds are calculated from them. A 10-spin-up endurance test tripped the ESC's thermal cutoff, so we capped throttle at 75%.</p>
+              <p>The team had no tachometer, so we recorded 3–5&nbsp;s of the weapon spinning and read the spectrum. These are estimates, and tip speeds are calculated from them.</p>
+              <p><strong>Rotation peak, not a harmonic.</strong> The lowest clean peak was taken as the rotation rate. The next peak up corresponds to 23,900&nbsp;RPM, faster than the weapon motor can drive the blade, so it can't be the rotation itself.</p>
+              <p><strong>Peak vs. operating speed.</strong> 14,480&nbsp;RPM is the 100% bench-test estimate. A 10-spin-up endurance test tripped the ESC's thermal cutoff, so we capped throttle at 75% (≈13,200&nbsp;RPM) and ran 40–55% in fights.</p>
               <pre class="calc">RPM   = f × 60        190 Hz → 11,400 RPM
 v_tip = RPM × D × π × 60 / 63,360   [mph, D in in]</pre>
             </div>
@@ -583,7 +619,7 @@ v_tip = RPM × D × π × 60 / 63,360   [mph, D in in]</pre>
     <article class="project" id="atreides">
       <div class="project-head">
         <p class="eyebrow">Two-weapon robot · Design review 2, Oct 2026</p>
-        <div class="name-row"><h3>Atreides</h3><span class="chip">In design</span></div>
+        <div class="name-row"><h3>Atreides</h3><span class="chip">In design · not built yet</span></div>
       </div>
       <div class="highlights">
         <div><b>2 weapons</b><span>vertical spinner + geared lifter, one chassis</span></div>
@@ -652,7 +688,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
     <article class="project" id="capsize">
       <div class="project-head">
         <p class="eyebrow">Center flipper · Fall 2024 – Spring 2025</p>
-        <h3>Capsize</h3>
+        <div class="name-row"><h3>Capsize</h3><span class="chip done">Competed · NHRL 2025</span></div>
       </div>
       <div class="highlights">
         <div><b>Bracket</b><span>won its fights and advanced</span></div>
@@ -712,7 +748,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
     <article class="project" id="nardo">
       <div class="project-head">
         <p class="eyebrow">Shuffler control robot · Spring 2024</p>
-        <h3>Nardo</h3>
+        <div class="name-row"><h3>Nardo</h3><span class="chip done">Competed · NHRL 2024</span></div>
       </div>
       <div class="highlights">
         <div><b>1st win</b><span>for a Sportsman robot on our subteam</span></div>
@@ -758,7 +794,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
         <img src="img/testbox-welding.jpg" alt="Welding the Testbox steel frame" loading="lazy" data-cap="Welding the Testbox frame">
         <div class="card-body">
           <p class="eyebrow">Team safety equipment · Jan – May 2025</p>
-          <h3>Testbox</h3>
+          <div class="name-row"><h3>Testbox</h3><span class="chip done">Built · in use</span></div>
           <p>A welded steel enclosure for spinning up weapons safely. I cut, clamped and welded the six-piece steel frame, checking squareness at each joint, and fit the wood panels, floor and lid.</p>
         </div>
       </article>
@@ -791,7 +827,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
     <article class="project" id="reaction-wheel">
       <div class="project-head">
         <p class="eyebrow">System dynamics (MAE 3260) · Fall 2025 · Team of four</p>
-        <h3>Reaction-wheel attitude control</h3>
+        <div class="name-row"><h3>Reaction-wheel attitude control</h3><span class="chip course">Course project + follow-up simulation</span></div>
       </div>
       <div class="highlights">
         <div><b>1 / I s²</b><span>single-axis plant I derived</span></div>
@@ -858,13 +894,37 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
           </dl>
         </div>
       </div>
+      <div class="block">
+        <h4>Simulated performance <span class="muted" style="font-weight:400;">(follow-up simulation, added after the course report)</span></h4>
+        <p class="muted" style="max-width:var(--measure);">The pole-placement design simulated for a 10° slew and a constant 10⁻⁵&nbsp;N·m disturbance, using illustrative small-satellite values: <i>I</i>&nbsp;=&nbsp;0.1&nbsp;kg·m², ζ&nbsp;=&nbsp;0.7, ω<sub>n</sub>&nbsp;=&nbsp;0.2&nbsp;rad/s, <i>a</i>&nbsp;=&nbsp;4. Run as derived, PID acting on the error adds a closed-loop zero and overshoots 28%, failing the 10% requirement. Applying the proportional term to the measured angle only (I-PD) removes that zero and meets it.</p>
+      </div>
+      <div class="plots">
+        <figure class="plot">
+          <svg id="plot-step" viewBox="0 0 480 300" role="img" aria-label="Step response to a 10 degree command. PID on error peaks near 12.8 degrees, 28 percent overshoot. I-PD peaks near 10.4 degrees, 4.4 percent overshoot. Both settle at 10 degrees."></svg>
+          <figcaption>10° step: attitude vs. time</figcaption>
+        </figure>
+        <figure class="plot">
+          <svg id="plot-dist" viewBox="0 0 480 300" role="img" aria-label="Disturbance rejection: a constant 1e-5 newton-meter torque pushes the attitude error to a peak of about 57 arcseconds, and integral action brings it back near zero within about 20 seconds."></svg>
+          <figcaption>Constant disturbance torque: pointing error vs. time</figcaption>
+        </figure>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Controller form</th><th>Overshoot</th><th>2% settling</th><th>Peak commanded torque</th><th>Disturbance</th></tr></thead>
+          <tbody>
+            <tr><td>PID on error (as derived)</td><td class="num">27.9%</td><td class="num">25.4 s</td><td class="num">4.61 mN·m</td><td class="num">57″ peak → 0</td></tr>
+            <tr><td>I-PD (setpoint weighting)</td><td class="delta">4.4%</td><td class="num">31.2 s</td><td class="num">0.38 mN·m</td><td class="num">57″ peak → 0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:0.95rem;">Script: <a href="https://github.com/mf833/portfolio/blob/main/sim/reaction_wheel_sim.py" target="_blank" rel="noopener">sim/reaction_wheel_sim.py ↗</a> (RK4, derivative on measurement). Peak torques are compared against the wheel's rated torque when choosing ω<sub>n</sub>.</p>
       <details class="more">
         <summary>Engineering details <span class="hint">· requirements, disturbances, pointing accuracy</span></summary>
         <div class="more-body">
           <div class="body-grid two">
             <div class="block">
               <h4>Design requirements</h4>
-              <p>Less than 10% overshoot to avoid oscillation during reorientation, with settling time t<sub>s</sub> = 4/(ζω<sub>n</sub>) as short as the wheel allows. The third pole sits at <i>a</i> = 3 to 5 times ω<sub>n</sub>. Larger <i>a</i> speeds up integral action but adds overshoot. The wheel's maximum torque, found with the initial value theorem, caps how aggressive the gains can be.</p>
+              <p>Less than 10% overshoot to avoid oscillation during reorientation, with settling time t<sub>s</sub> ≈ 4/(ζω<sub>n</sub>) as short as the wheel allows. The third pole sits at <i>s</i> = −<i>a</i>ω<sub>n</sub>, where <i>a</i> is dimensionless and typically 3–5. Larger <i>a</i> speeds up integral action but adds overshoot. The initial value theorem gives the initial commanded torque for a step command; with derivative on measurement, <i>T</i><sub>c</sub>(0⁺) = <i>K</i><sub>p</sub>Δθ. That commanded torque is then compared against the wheel's actual rated torque, which caps how aggressive the gains can be.</p>
             </div>
             <div class="block">
               <h4>Disturbance torques</h4>
@@ -882,8 +942,8 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
     <!-- Torque wrench -->
     <article class="project" id="torque-wrench">
       <div class="project-head">
-        <p class="eyebrow">Mechanics of materials · ANSYS · Course project</p>
-        <h3>Strain-gauge torque wrench</h3>
+        <p class="eyebrow">Mechanics of materials · ANSYS</p>
+        <div class="name-row"><h3>Strain-gauge torque wrench</h3><span class="chip course">Course project</span></div>
       </div>
       <div class="highlights">
         <div><b>0.1%</b><span>gauge strain, beam theory vs. FEA</span></div>
@@ -918,7 +978,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
         <img src="img/desk-demo.jpg" alt="ExtenDesk prototype clamped to a lecture-hall desk" loading="lazy" data-cap="ExtenDesk prototype in a lecture hall">
         <div class="card-body">
           <p class="eyebrow">Product development · Jan – May 2025</p>
-          <h3>ExtenDesk</h3>
+          <div class="name-row"><h3>ExtenDesk</h3><span class="chip course">Course prototype</span></div>
           <p>A clamp-on desk extension for small lecture-hall desks, built on a $500 budget across three test cycles. Sliders grip different desk thicknesses and a hinged platform folds out, with an acrylic surface that doubles as a whiteboard. An external judging panel picked it as one of the strongest concepts.</p>
         </div>
       </article>
@@ -977,6 +1037,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
       <span class="email">mf833@cornell.edu</span>
       <button class="btn" type="button" data-copy="mf833@cornell.edu" id="copy-footer">Copy email</button>
       <a href="https://www.linkedin.com/in/manuely-feliz-portes/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://mf833.github.io/portfolio/Manuely_Feliz_Portes_Resume.pdf" target="_blank" rel="noopener">View résumé (PDF) ↗</a>
     </div>
   </div>
 </footer>
@@ -992,14 +1053,95 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lb-img');
   var lbCap = document.getElementById('lb-cap');
+  // Wrap each zoomable image in a real button so it works from the keyboard.
   document.querySelectorAll('img[data-cap]').forEach(function (img) {
-    img.addEventListener('click', function () {
+    if (img.closest('a, button')) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'zoom';
+    btn.setAttribute('aria-label', 'Enlarge image: ' + img.dataset.cap);
+    img.parentNode.insertBefore(btn, img);
+    btn.appendChild(img);
+    btn.addEventListener('click', function () {
       if (!lb.showModal) return;
       lbImg.src = img.currentSrc || img.src;
       lbImg.alt = img.alt;
       lbCap.textContent = img.dataset.cap;
       lb.showModal();
     });
+  });
+
+  // Reaction-wheel simulation: same model and RK4 integrator as sim/reaction_wheel_sim.py.
+  function simulate(ref, tau, b, tEnd) {
+    var I = 0.1, zeta = 0.7, wn = 0.2, a = 4, dt = 0.01;
+    var Kd = I * wn * (a + 2 * zeta), Kp = I * wn * wn * (1 + 2 * a * zeta), Ki = a * I * Math.pow(wn, 3);
+    var f = function (x) {
+      var tc = Kp * (b * ref - x[0]) + Ki * x[2] - Kd * x[1];
+      return [x[1], (tc + tau) / I, ref - x[0]];
+    };
+    var add = function (x, k, h) { return x.map(function (v, i) { return v + h * k[i]; }); };
+    var x = [0, 0, 0], out = [];
+    for (var n = 0; n * dt <= tEnd + 1e-9; n++) {
+      if (n % 20 === 0) out.push([n * dt, x[0]]);
+      var k1 = f(x), k2 = f(add(x, k1, dt / 2)), k3 = f(add(x, k2, dt / 2)), k4 = f(add(x, k3, dt));
+      x = x.map(function (v, i) { return v + dt / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]); });
+    }
+    return out;
+  }
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(svg, tag, attrs, text) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    svg.appendChild(e);
+    return e;
+  }
+  function plot(svg, o) {
+    if (!svg) return;
+    var L = 54, R = 14, T = 14, B = 46, W = 480, H = 300;
+    var sx = function (t) { return L + (t - o.x0) / (o.x1 - o.x0) * (W - L - R); };
+    var sy = function (v) { return T + (o.y1 - v) / (o.y1 - o.y0) * (H - T - B); };
+    o.yticks.forEach(function (v) {
+      el(svg, 'line', { class: 'grid', x1: L, x2: W - R, y1: sy(v), y2: sy(v) });
+      el(svg, 'text', { class: 'tick', x: L - 8, y: sy(v) + 4, 'text-anchor': 'end' }, v);
+    });
+    o.xticks.forEach(function (t) {
+      el(svg, 'text', { class: 'tick', x: sx(t), y: H - B + 18, 'text-anchor': 'middle' }, t);
+    });
+    el(svg, 'line', { class: 'ax', x1: L, x2: W - R, y1: H - B, y2: H - B });
+    el(svg, 'line', { class: 'ax', x1: L, x2: L, y1: T, y2: H - B });
+    el(svg, 'text', { class: 'axl', x: (L + W - R) / 2, y: H - 8, 'text-anchor': 'middle' }, 'time (s)');
+    el(svg, 'text', { class: 'axl', x: 14, y: (T + H - B) / 2, 'text-anchor': 'middle', transform: 'rotate(-90 14 ' + (T + H - B) / 2 + ')' }, o.ylabel);
+    (o.refs || []).forEach(function (r) {
+      el(svg, 'line', { class: r.cls, x1: L, x2: W - R, y1: sy(r.y), y2: sy(r.y) });
+      if (r.label) el(svg, 'text', { class: r.lcls, x: W - R - 4, y: sy(r.y) - 5, 'text-anchor': 'end' }, r.label);
+    });
+    o.series.forEach(function (s) {
+      var d = s.pts.filter(function (p) { return p[0] <= o.x1; })
+        .map(function (p, i) { return (i ? 'L' : 'M') + sx(p[0]).toFixed(1) + ',' + sy(s.map(p[1])).toFixed(1); }).join('');
+      el(svg, 'path', { class: s.cls, d: d });
+      el(svg, 'text', { class: s.lcls, x: sx(s.lx), y: sy(s.ly) }, s.label);
+    });
+  }
+
+  var deg = 180 / Math.PI, ref = 10 / deg;
+  plot(document.getElementById('plot-step'), {
+    x0: 0, x1: 60, y0: 0, y1: 14, xticks: [0, 10, 20, 30, 40, 50, 60], yticks: [0, 2, 4, 6, 8, 10, 12, 14],
+    ylabel: 'angle (°)',
+    refs: [{ y: 11, cls: 'band', label: '10% overshoot limit', lcls: 'lab-band' }, { y: 10, cls: 'refl' }],
+    series: [
+      { pts: simulate(ref, 0, 1, 60), map: function (v) { return v * deg; }, cls: 's-pid', lcls: 'lab-pid', label: 'PID on error · 28%', lx: 15, ly: 13 },
+      { pts: simulate(ref, 0, 0, 60), map: function (v) { return v * deg; }, cls: 's-ipd', lcls: 'lab-ipd', label: 'I-PD · 4.4%', lx: 34, ly: 8.6 }
+    ]
+  });
+  plot(document.getElementById('plot-dist'), {
+    x0: 0, x1: 80, y0: -10, y1: 70, xticks: [0, 20, 40, 60, 80], yticks: [0, 20, 40, 60],
+    ylabel: 'pointing error (arcsec)',
+    refs: [{ y: 0, cls: 'refl' }],
+    series: [
+      { pts: simulate(0, 1e-5, 0, 80), map: function (v) { return v * deg * 3600; }, cls: 's-ipd', lcls: 'lab-ipd', label: 'τ_d = 10⁻⁵ N·m, integral action → 0', lx: 22, ly: 50 }
+    ]
   });
   document.getElementById('lb-close').addEventListener('click', function () { lb.close(); });
   lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
