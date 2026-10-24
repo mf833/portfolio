@@ -108,24 +108,6 @@ img { display: block; max-width: 100%; height: auto; }
 /* zoomable images are wrapped in buttons by script for keyboard access */
 button.zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; font: inherit; color: inherit; }
 button.zoom:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
-
-/* simulation plots */
-.plots { display: grid; gap: 1rem; }
-@media (min-width: 880px) { .plots { grid-template-columns: 1fr 1fr; } }
-.plot { margin: 0; background: var(--sheet); border: 1px solid var(--rule); padding: 0.75rem 0.75rem 0.5rem; min-width: 0; }
-.plot svg { display: block; width: 100%; height: auto; }
-.plot .ax { stroke: var(--ink-2); stroke-width: 1; }
-.plot .grid { stroke: var(--rule); stroke-width: 1; }
-.plot .tick { font-family: var(--f-mono); font-size: 12px; fill: var(--ink-2); }
-.plot .axl { font-family: var(--f-body); font-size: 13px; fill: var(--ink-2); }
-.plot .s-pid { stroke: var(--ink-2); stroke-width: 2; fill: none; stroke-dasharray: 5 4; }
-.plot .s-ipd { stroke: var(--brass); stroke-width: 2.5; fill: none; }
-.plot .refl { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; fill: none; }
-.plot .band { stroke: var(--green); stroke-width: 1; stroke-dasharray: 6 4; fill: none; }
-.plot .lab-pid { font-family: var(--f-body); font-size: 13px; fill: var(--ink-2); }
-.plot .lab-ipd { font-family: var(--f-body); font-size: 13px; font-weight: 600; fill: var(--brass); }
-.plot .lab-band { font-family: var(--f-body); font-size: 12px; fill: var(--green); }
-
 /* ---------- type ---------- */
 .eyebrow {
   font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: 0.05em; text-transform: uppercase;
@@ -452,7 +434,7 @@ dialog.lb button {
           <span class="eq-small">θ(<i>s</i>) / <i>T</i>(<i>s</i>) = 1 / <i>I s</i>²</span>
           <span class="eq-small">PID · pole placement</span>
         </div>
-        <div class="fbody"><span class="chip course">Course project + simulation</span><h3>Reaction-wheel attitude control</h3><p class="tags">Dynamic modeling · Feedback control</p><p class="key">4.4% overshoot with I-PD (simulated)</p></div>
+        <div class="fbody"><span class="chip course">Course project</span><h3>Reaction-wheel attitude control</h3><p class="tags">Dynamic modeling · Feedback control</p><p class="key">PID gains by pole placement</p></div>
       </a>
       <a class="fcard" href="#torque-wrench">
         <div class="thumb"><img src="img/wrench-stress.jpg" alt="" width="1280" height="466"></div>
@@ -835,7 +817,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
     <article class="project" id="reaction-wheel">
       <div class="project-head">
         <p class="eyebrow">System dynamics (MAE 3260) · Fall 2025 · Team of four</p>
-        <div class="name-row"><h3>Reaction-wheel attitude control</h3><span class="chip course">Course project + follow-up simulation</span></div>
+        <div class="name-row"><h3>Reaction-wheel attitude control</h3><span class="chip course">Course project</span></div>
       </div>
       <div class="highlights">
         <div><b>1 / I s²</b><span>single-axis plant I derived</span></div>
@@ -902,30 +884,6 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
           </dl>
         </div>
       </div>
-      <div class="block">
-        <h4>Simulated performance <span class="muted" style="font-weight:400;">(follow-up simulation, added after the course report)</span></h4>
-        <p class="muted" style="max-width:var(--measure);">The pole-placement design simulated for a 10° slew and a constant 10⁻⁵&nbsp;N·m disturbance, using illustrative small-satellite values: <i>I</i>&nbsp;=&nbsp;0.1&nbsp;kg·m², ζ&nbsp;=&nbsp;0.7, ω<sub>n</sub>&nbsp;=&nbsp;0.2&nbsp;rad/s, <i>a</i>&nbsp;=&nbsp;4. Run as derived, PID acting on the error adds a closed-loop zero and overshoots 28%, failing the 10% requirement. Applying the proportional term to the measured angle only (I-PD) removes that zero and meets it.</p>
-      </div>
-      <div class="plots">
-        <figure class="plot">
-          <svg id="plot-step" viewBox="0 0 480 300" role="img" aria-label="Step response to a 10 degree command. PID on error peaks near 12.8 degrees, 28 percent overshoot. I-PD peaks near 10.4 degrees, 4.4 percent overshoot. Both settle at 10 degrees."></svg>
-          <figcaption>10° step: attitude vs. time</figcaption>
-        </figure>
-        <figure class="plot">
-          <svg id="plot-dist" viewBox="0 0 480 300" role="img" aria-label="Disturbance rejection: a constant 1e-5 newton-meter torque pushes the attitude error to a peak of about 57 arcseconds, and integral action brings it back near zero within about 20 seconds."></svg>
-          <figcaption>Constant disturbance torque: pointing error vs. time</figcaption>
-        </figure>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Controller form</th><th>Overshoot</th><th>2% settling</th><th>Peak commanded torque</th><th>Disturbance</th></tr></thead>
-          <tbody>
-            <tr><td>PID on error (as derived)</td><td class="num">27.9%</td><td class="num">25.4 s</td><td class="num">4.61 mN·m</td><td class="num">57″ peak → 0</td></tr>
-            <tr><td>I-PD (setpoint weighting)</td><td class="delta">4.4%</td><td class="num">31.2 s</td><td class="num">0.38 mN·m</td><td class="num">57″ peak → 0</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="muted" style="font-size:0.95rem;">Script: <a href="https://github.com/mf833/portfolio/blob/main/sim/reaction_wheel_sim.py" target="_blank" rel="noopener">sim/reaction_wheel_sim.py ↗</a> (RK4, derivative on measurement). Peak torques are compared against the wheel's rated torque when choosing ω<sub>n</sub>.</p>
       <details class="more">
         <summary>Engineering details <span class="hint">· requirements, disturbances, pointing accuracy</span></summary>
         <div class="more-body">
@@ -1078,81 +1036,6 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
       lb.showModal();
     });
   });
-
-  // Reaction-wheel simulation: same model and RK4 integrator as sim/reaction_wheel_sim.py.
-  function simulate(ref, tau, b, tEnd) {
-    var I = 0.1, zeta = 0.7, wn = 0.2, a = 4, dt = 0.01;
-    var Kd = I * wn * (a + 2 * zeta), Kp = I * wn * wn * (1 + 2 * a * zeta), Ki = a * I * Math.pow(wn, 3);
-    var f = function (x) {
-      var tc = Kp * (b * ref - x[0]) + Ki * x[2] - Kd * x[1];
-      return [x[1], (tc + tau) / I, ref - x[0]];
-    };
-    var add = function (x, k, h) { return x.map(function (v, i) { return v + h * k[i]; }); };
-    var x = [0, 0, 0], out = [];
-    for (var n = 0; n * dt <= tEnd + 1e-9; n++) {
-      if (n % 20 === 0) out.push([n * dt, x[0]]);
-      var k1 = f(x), k2 = f(add(x, k1, dt / 2)), k3 = f(add(x, k2, dt / 2)), k4 = f(add(x, k3, dt));
-      x = x.map(function (v, i) { return v + dt / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]); });
-    }
-    return out;
-  }
-
-  var NS = 'http://www.w3.org/2000/svg';
-  function el(svg, tag, attrs, text) {
-    var e = document.createElementNS(NS, tag);
-    for (var k in attrs) e.setAttribute(k, attrs[k]);
-    if (text != null) e.textContent = text;
-    svg.appendChild(e);
-    return e;
-  }
-  function plot(svg, o) {
-    if (!svg) return;
-    var L = 54, R = 14, T = 14, B = 46, W = 480, H = 300;
-    var sx = function (t) { return L + (t - o.x0) / (o.x1 - o.x0) * (W - L - R); };
-    var sy = function (v) { return T + (o.y1 - v) / (o.y1 - o.y0) * (H - T - B); };
-    o.yticks.forEach(function (v) {
-      el(svg, 'line', { class: 'grid', x1: L, x2: W - R, y1: sy(v), y2: sy(v) });
-      el(svg, 'text', { class: 'tick', x: L - 8, y: sy(v) + 4, 'text-anchor': 'end' }, v);
-    });
-    o.xticks.forEach(function (t) {
-      el(svg, 'text', { class: 'tick', x: sx(t), y: H - B + 18, 'text-anchor': 'middle' }, t);
-    });
-    el(svg, 'line', { class: 'ax', x1: L, x2: W - R, y1: H - B, y2: H - B });
-    el(svg, 'line', { class: 'ax', x1: L, x2: L, y1: T, y2: H - B });
-    el(svg, 'text', { class: 'axl', x: (L + W - R) / 2, y: H - 8, 'text-anchor': 'middle' }, 'time (s)');
-    el(svg, 'text', { class: 'axl', x: 14, y: (T + H - B) / 2, 'text-anchor': 'middle', transform: 'rotate(-90 14 ' + (T + H - B) / 2 + ')' }, o.ylabel);
-    (o.refs || []).forEach(function (r) {
-      el(svg, 'line', { class: r.cls, x1: L, x2: W - R, y1: sy(r.y), y2: sy(r.y) });
-      if (r.label) el(svg, 'text', { class: r.lcls, x: W - R - 4, y: sy(r.y) - 5, 'text-anchor': 'end' }, r.label);
-    });
-    o.series.forEach(function (s) {
-      var d = s.pts.filter(function (p) { return p[0] <= o.x1; })
-        .map(function (p, i) { return (i ? 'L' : 'M') + sx(p[0]).toFixed(1) + ',' + sy(s.map(p[1])).toFixed(1); }).join('');
-      el(svg, 'path', { class: s.cls, d: d });
-      el(svg, 'text', { class: s.lcls, x: sx(s.lx), y: sy(s.ly) }, s.label);
-    });
-  }
-
-  var deg = 180 / Math.PI, ref = 10 / deg;
-  plot(document.getElementById('plot-step'), {
-    x0: 0, x1: 60, y0: 0, y1: 14, xticks: [0, 10, 20, 30, 40, 50, 60], yticks: [0, 2, 4, 6, 8, 10, 12, 14],
-    ylabel: 'angle (°)',
-    refs: [{ y: 11, cls: 'band', label: '10% overshoot limit', lcls: 'lab-band' }, { y: 10, cls: 'refl' }],
-    series: [
-      { pts: simulate(ref, 0, 1, 60), map: function (v) { return v * deg; }, cls: 's-pid', lcls: 'lab-pid', label: 'PID on error · 28%', lx: 15, ly: 13 },
-      { pts: simulate(ref, 0, 0, 60), map: function (v) { return v * deg; }, cls: 's-ipd', lcls: 'lab-ipd', label: 'I-PD · 4.4%', lx: 34, ly: 8.6 }
-    ]
-  });
-  plot(document.getElementById('plot-dist'), {
-    x0: 0, x1: 80, y0: -10, y1: 70, xticks: [0, 20, 40, 60, 80], yticks: [0, 20, 40, 60],
-    ylabel: 'pointing error (arcsec)',
-    refs: [{ y: 0, cls: 'refl' }],
-    series: [
-      { pts: simulate(0, 1e-5, 0, 80), map: function (v) { return v * deg * 3600; }, cls: 's-ipd', lcls: 'lab-ipd', label: 'τ_d = 10⁻⁵ N·m, integral action → 0', lx: 22, ly: 50 }
-    ]
-  });
-  document.getElementById('lb-close').addEventListener('click', function () { lb.close(); });
-  lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
 
   document.querySelectorAll('[data-copy]').forEach(function (btn) {
     btn.addEventListener('click', function () {
