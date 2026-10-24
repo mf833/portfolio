@@ -166,7 +166,7 @@ p { margin: 0; }
 .plate .dot { fill: #16201e; }
 .plate .ring { fill: none; stroke: #16201e; stroke-width: 2.4; }
 .callout {
-  position: absolute; left: 71%; top: 80%; transform: translateY(-50%);
+  position: absolute; left: 66%; top: 83%; transform: translateY(-50%);
   font-family: var(--f-mono); font-size: 0.75rem; line-height: 1.35; color: #16201e;
   background: rgba(248, 250, 249, 0.92); border: 1px solid #16201e; padding: 0.35rem 0.55rem; white-space: nowrap;
 }
@@ -307,6 +307,14 @@ td.delta { font-family: var(--f-mono); color: var(--brass); font-weight: 500; }
 .bd .eqt { font-family: "Times New Roman", "STIX Two Text", Georgia, serif; font-size: 19px; font-style: italic; }
 .bd .eqt.sm { font-size: 16px; }
 .bd .sub { font-size: 12px; }
+/* second-derivative dots drawn centered over the symbol (combining U+0308 drifts in most serif fonts) */
+.ddot { position: relative; display: inline-block; font-style: italic; line-height: 1; }
+.ddot::before, .ddot::after {
+  content: ""; position: absolute; top: -0.06em; width: 0.12em; height: 0.12em; border-radius: 50%; background: currentColor;
+}
+.ddot::before { left: calc(50% - 0.1em); }
+.ddot::after { left: calc(50% + 0.09em); }
+.eq dd sub, .eq-thumb sub { font-size: 0.65em; vertical-align: -0.3em; line-height: 0; }
 .eq-thumb { display: flex !important; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; padding: 1rem; text-align: center; }
 .eq-big { font-family: "Times New Roman", "STIX Two Text", Georgia, serif; font-size: clamp(1.6rem, 4vw, 2.1rem); color: var(--ink); }
 .eq-small { font-family: "Times New Roman", "STIX Two Text", Georgia, serif; font-size: 1.15rem; color: var(--ink-2); }
@@ -409,7 +417,7 @@ dialog.lb button {
       <svg viewBox="0 0 1480 1122" aria-hidden="true">
         <circle class="ring" cx="1032" cy="686" r="34"/>
         <circle class="dot" cx="1032" cy="686" r="6"/>
-        <polyline class="leader" points="1032,720 1032,898 1051,898"/>
+        <polyline class="leader" points="1032,720 1032,862"/>
       </svg>
       <div class="callout" aria-hidden="true"><b>WEAPON PEAK (EST.)</b>14,480 RPM<br>≈280 mph tip</div>
       <figcaption>Jörmungandr · 12 lb spinner · Fusion 360 render</figcaption>
@@ -440,7 +448,7 @@ dialog.lb button {
       </a>
       <a class="fcard" href="#reaction-wheel">
         <div class="thumb eq-thumb" aria-hidden="true">
-          <span class="eq-big"><i>I</i> θ̈ = <i>T</i><sub>c</sub> + τ<sub>d</sub></span>
+          <span class="eq-big"><i>I</i> <span class="ddot">θ</span> = <i>T</i><sub>c</sub> + τ<sub>d</sub></span>
           <span class="eq-small">θ(<i>s</i>) / <i>T</i>(<i>s</i>) = 1 / <i>I s</i>²</span>
           <span class="eq-small">PID · pole placement</span>
         </div>
@@ -878,7 +886,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
       </figure>
       <div class="sheet-grid">
         <dl class="eqs">
-          <div class="eq"><dt>Dynamics</dt><dd><i>I</i> θ̈ = <i>T</i><sub>c</sub> + τ<sub>drag</sub> + τ<sub>SRP</sub></dd></div>
+          <div class="eq"><dt>Dynamics</dt><dd><i>I</i> <span class="ddot">θ</span> = <i>T</i><sub>c</sub> + τ<sub>drag</sub> + τ<sub>SRP</sub></dd></div>
           <div class="eq"><dt>Plant</dt><dd>θ(<i>s</i>) / <i>T</i><sub>c</sub>(<i>s</i>) = 1 / (<i>I s</i>²)</dd></div>
           <div class="eq"><dt>Char. equation</dt><dd><i>I s</i>³ + <i>K</i><sub>d</sub> <i>s</i>² + <i>K</i><sub>p</sub> <i>s</i> + <i>K</i><sub>i</sub> = 0</dd></div>
           <div class="eq"><dt>Target poles</dt><dd>(<i>s</i> + <i>a</i>ω<sub>n</sub>)(<i>s</i>² + 2ζω<sub>n</sub><i>s</i> + ω<sub>n</sub>²) = 0</dd></div>
