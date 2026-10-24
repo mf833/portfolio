@@ -890,7 +890,7 @@ v_tip = ω r = 1,937 × 0.0847 m ≈ 366 mph</pre>
           <div class="body-grid two">
             <div class="block">
               <h4>Design requirements</h4>
-              <p>Less than 10% overshoot to avoid oscillation during reorientation, with settling time t<sub>s</sub> ≈ 4/(ζω<sub>n</sub>) as short as the wheel allows. The third pole sits at <i>s</i> = −<i>a</i>ω<sub>n</sub>, where <i>a</i> is dimensionless and typically 3–5. Larger <i>a</i> speeds up integral action but adds overshoot. The initial value theorem gives the initial commanded torque for a step command; with derivative on measurement, <i>T</i><sub>c</sub>(0⁺) = <i>K</i><sub>p</sub>Δθ. That commanded torque is then compared against the wheel's actual rated torque, which caps how aggressive the gains can be.</p>
+              <p>Less than 10% overshoot to avoid oscillation during reorientation, with settling time t<sub>s</sub> ≈ 4/(ζω<sub>n</sub>) as short as the wheel allows. The third closed-loop pole is placed at <i>s</i> = −<i>a</i>ω<sub>n</sub>, where <i>a</i> is typically selected between 3 and 5. Larger <i>a</i> speeds up integral action but adds overshoot. Controller gains must be selected so the required control torque remains within the reaction wheel's actuator limits.</p>
             </div>
             <div class="block">
               <h4>Disturbance torques</h4>
